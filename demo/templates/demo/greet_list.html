@@ -1,0 +1,33 @@
+{% load staticfiles %}
+{% load get_list_underscore %}
+<table>
+	<thead>
+		<tr>
+			<th>Author</th>
+			<th>Content</th>
+			<th>Date</th>
+            <th>Delete</th>
+            <th>Update</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for book in object_list %}
+		<tr>
+			<td>{{ book.author }}</td>
+			<td>{{ book.content }}</td>
+			<td>{{ book.date }}</td>
+			<td><button id ="{{ book|get:"_id" }}" class = "Delete">Delete</button></td>
+			<td><button id ="{{ book|get:"_id" }}" class = "Update">Update</button></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<div class="pagination">
+    {% for x in page_obj.paginator.page_range %}
+        <button><a href="?page={{ x }}">{{ x }}</a></button>
+    {% endfor %}
+</div>
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/home.js" %}"></script>
